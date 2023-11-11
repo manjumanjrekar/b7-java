@@ -1,6 +1,6 @@
 pipeline {
 
-	agent {
+	agent any 
 
 }
         
@@ -25,5 +25,5 @@ pipeline {
 			}
 		}
 	    }
-	}	
+		
 
