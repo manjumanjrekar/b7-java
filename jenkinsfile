@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Image') {
+            steps {
+                script {
+                    // Build Docker image
+                    sh 'docker build -t tom12:2.0:latest .'
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    // Log in to Docker Hub
+                    withDockerRegistry([credentialsId: 'manju256', url: 'https://hub.docker.com/repository/docker/manju256/mmb7/']) {
+                        // Push Docker image to Docker Hub
+                        sh 'docker push your_image_name:latest'
+                    }
+                }
+            }
+        }
+    }
+}
