@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker build -t tom12:2.0:latest .'
+                    sh 'docker build -t tom12:2.0 .'
                 }
             }
         }
