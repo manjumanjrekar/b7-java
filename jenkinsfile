@@ -16,7 +16,8 @@ pipeline {
                 script {
                     // Log in to Docker Hub
                     withDockerRegistry([credentialsId: 'manju256/Sonovision@2023', url: 'https://hub.docker.com/repository/docker/manju256/mmb7/general/']) {
-                        // Push Docker image to Docker Hub
+                        sh "docker login -u ${manju256} -p ${Sonovision@2023}"
+    // Push Docker image to Docker Hub
                         sh 'docker push tom12:2.0'
                     }
                 }
