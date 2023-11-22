@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Log in to Docker Hub with credentials
-                    sh 'docker login -u manju256 -p Sonovision@2023 url: 'https://hub.docker.com/repository/docker/manju256/mmb7/general'
+                    sh 'docker login -u manju256 -p Sonovision@2023 https://hub.docker.com/repository/docker/manju256/mmb7/general'
                     sh 'docker push tom12:2.0'
                 }
             }
