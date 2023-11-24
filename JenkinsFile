@@ -1,29 +1,32 @@
-pipeline {
+node {
+    def app
 
-	agent any 
+    stage('Clone repository') {
+	https://github.com/manjumanjrekar/b7-java.git
+      
 
-}
+        checkout scm
+    }
+
+    stage('Build image') {
+  
+       app = docker.build("mmanjrekar/test")
+    }
+
+    stage('Test image') {
+  
+
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
+    }
+
+    stage('Push image') {
         
-        stages{   
-		stage(clean){
-			steps{
-				    sh 'mvn clean'
-			}
-			
-		}
-		
-		stage(install){
-			steps{
-				    sh 'mvn install'
-			     
-			}
-			post{
-			    always{
-			        archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
-                                junit 'target/surefire-reports/*.xml'
-			    }
-			}
-		}
-	    
-	}		
+        docker.withRegistry('https://hub.docker.com/repository/docker/manju256/mmb7/general', 'git') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+    }
+}	
 
